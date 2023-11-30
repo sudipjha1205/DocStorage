@@ -1,0 +1,10 @@
+.company-name{
+    font-size: 22px;
+    font-weight: 500;
+    color: beige;
+}
+
+.navbar-brand{
+    display: flex;
+    align-items: center;
+}

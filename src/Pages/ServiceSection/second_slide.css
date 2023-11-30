@@ -1,0 +1,28 @@
+.second-slide-text{
+    width: 100%;
+    padding-top: 150px;
+    font-size: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@media (max-width: 600px) {
+    .second-slide-text {
+      width: 75%; /* Adjust as needed for smaller screens */
+      padding-top: 0px;
+    }
+  }
+
+.second-slide-image{
+    padding: 20px;
+    padding-top: 70px;   
+    height: 600px;
+    width: 600px;
+}
+
+@media (max-width: 600px) {
+    .second-slide-image {
+      padding: 20px; /* Adjust as needed for smaller screens */
+      height: 400px;
+      width: 400px;
+    }
+  }
