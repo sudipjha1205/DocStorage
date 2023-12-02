@@ -14,7 +14,7 @@ const TopSection = () => {
                     </div>
                     <div className='motto'>Everything in your pocket</div>
                     <div>
-                        <button className='topsection-button'>Log In</button>
+                        <button className='topsection-button'><a href='/signin'>Log In</a></button>
                     </div>
                 </div>
             </div>
