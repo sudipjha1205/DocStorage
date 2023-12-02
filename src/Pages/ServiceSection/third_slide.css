@@ -1,14 +1,16 @@
 .third-slide-text{
-    width: 100%;
+    width: 80%;
     padding-top: 150px;
     font-size: 20px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .third-slide-text {
       width: 75%; /* Adjust as needed for smaller screens */
       padding-top: 0px;
+      font-size: 15px;
     }
   }
 
@@ -17,9 +19,16 @@
     padding-top: 70px;   
     height: 600px;
     width: 500px;
+    display: flex;
+    align-items: center;
 }
 
-@media (max-width: 600px) {
+.slide-style{
+  padding-bottom: 50px;
+}
+
+
+@media (max-width: 768px) {
     .third-slide-image {
       padding: 20px; /* Adjust as needed for smaller screens */
       height: 400px;

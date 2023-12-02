@@ -1,17 +1,14 @@
 .servicesection{
-    height: 100vh;
+    height: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .service-name{
-    position: absolute;
-    top: 110%;
-    left: 45%;
+    text-align: center;
 }
 
-@media (max-width: 600px) {
-    .service-name {
-      position: absolute;
-      top: 105%;
-      left: 40%; /* Adjust as needed for smaller screens */
-    }
-  }
+.service-heading{
+    text-align: center;
+    padding: 50px;
+}

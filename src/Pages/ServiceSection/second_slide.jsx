@@ -5,7 +5,7 @@ import './second_slide.css';
 
 const Second_Slide = () => {
     return (
-      <div className='container text-center d-flex align-items-center justify-content-center vh-100'>
+      <div className='container text-center d-flex align-items-center justify-content-center h-auto slide-style'>
         <div className='row'>
           <div className='col-md-6 d-flex justify-content-center p-4'>
             <div className='second-slide-text'>

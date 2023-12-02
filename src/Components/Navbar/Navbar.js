@@ -1,19 +1,48 @@
-import React from 'react';
-
-import './Navbar.css';
+import React, { useRef, useEffect, useState } from 'react';
 import logo from "../../Assets/logo_croped.png";
+import './Navbar.css';
 
 const Navbar = () => {
+  const navbarRef = useRef(null);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        setIsNavOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-            <img src={logo} alt="Logo" width="30" height="30" className="d-inline-block align-top" style={{ marginRight: '10px'}}/>
-            <span className='company-name'>DOC STORAGE</span>
+      <div className="container-fluid" ref={navbarRef}>
+        <a className="navbar-brand" href="/">
+          <img src={logo} alt="Logo" width="30" height="30" className="d-inline-block align-top" style={{ marginRight: '10px' }} />
+          <span className='company-name'>DOC STORAGE</span>
         </a>
 
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul className="navbar-nav">
+        <button
+          className={`navbar-toggler custom-toggler ${isNavOpen ? 'open' : ''}`}
+          type="button"
+          onClick={toggleNav}
+        >
+          <CustomTogglerIcon isNavOpen={isNavOpen} />
+        </button>
+
+        <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`} id="navbarNav">
+          <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <a className="nav-link" href="#" style={{ color: 'beige' }}>Home</a>
             </li>
@@ -32,5 +61,14 @@ const Navbar = () => {
     </nav>
   );
 };
+
+const CustomTogglerIcon = ({ isNavOpen }) => (
+  <span className={`custom-toggler-icon ${isNavOpen ? 'open' : ''}`}>
+    <div className={`custom-toggler-bar top-bar ${isNavOpen ? 'open' : ''}`}></div>
+    <div className={`custom-toggler-bar middle-bar ${isNavOpen ? 'open' : ''}`}></div>
+    <div className={`custom-toggler-bar bottom-bar ${isNavOpen ? 'open' : ''}`}></div>
+  </span>
+);
+
 
 export default Navbar;
