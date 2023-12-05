@@ -16,7 +16,7 @@ const Login = () => {
         <h3>Login Form</h3>
             <form className="form-style">
               <label htmlFor="username" className="label-style">
-                Username:
+                Email:
               </label>
               <input className="input-style" type="text" id="username" name="username" required />
 
