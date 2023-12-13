@@ -1,20 +1,36 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate,Redirect } from 'react-router-dom';
 import "./login.css"; // Ensure that your CSS file is correctly linked
 import show from "../../Illustrations/show.png";
 import hide from "../../Illustrations/hide.png";
 
 const Registration = () => {
   const [password, setPassword] = useState('');
-  const [confirmpassword, setConfirmPassword] = useState('');
+  const [register_confirmpassword, setRegister_ConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
-    register_username: '',
-    register_password: '',
-    register_confirmpassword: '',
+    email: '',
+    password: '',
   });
   const [error, setError] = useState('');
+  const [csrfToken, setCsrfToken] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch CSRF token from the server
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/user/csrf_token/');
+        setCsrfToken(response.data.csrfToken);
+      } catch (error) {
+        console.error('Failed to fetch CSRF token', error);
+      }
+    };
+
+    fetchCsrfToken();
+  }, []); // Empty dependency array ensures this effect runs only once
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -28,60 +44,86 @@ const Registration = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleConfirmPassword = (e) => {
+    setRegister_ConfirmPassword(e.target.value);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
-    if (formData.register_password != formData.register_confirmpassword){
+    if (formData.password != register_confirmpassword){
       setError("Passwords don't match");
       alert("Password doesn't matches");
       return
     }
 
+    // Add the CSRF token to the headers
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': csrfToken,
+    };
+
     try {
-      const response = fetch('http://localhost:8000/api/register/',{method:'post', headers: {'Content-Type': 'application/json'},body: JSON.stringify({'email':formData.register_email, 'password': formData.register_password})});
-      console.log(response.data);
+      console.log('Form Data:', formData);
+      console.log('Headers:', headers);
+
+      const response = await fetch('http://localhost:8000/user/register/', {
+        method: 'post',
+        headers: headers,
+        body: JSON.stringify(formData),
+      });
+      console.log(response)
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+      if (response['statusText'] === "OK"){
+        alert("Registered Successfully");
+        setFormData({
+          email: '',
+          password: ''})
+        setRegister_ConfirmPassword('');
+      }
     } catch (error) {
-      setError('Registration failed. Please try again.');
+      alert("User already exists")
       console.error('Registration failed', error);
     }
-
-    
   };
 
   return (
     <div>
-        <h3>Registration Form</h3>
-            <form className="form-style">
-              {error && <p style={{ color: 'red' }}>{error}</p>}
-              <label htmlFor="register_username" className="label-style">
-                Email:
-              </label>
-              <input className="input-style" type="text" id="register_username" name="register_username" onChange={handleChange} required />
+      <h3>Registration Form</h3>
+      <form className="form-style">
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <label htmlFor="email" className="label-style">
+          Email:
+        </label>
+        <input className="input-style" type="text" id="email" name="email" value={formData['email']} onChange={handleChange} required />
 
-              <label className="label-style" htmlFor="register_password">
-                Password:
-              </label>
-              <div className="password-toggle">
-                <input type={showPassword ? 'text' : 'password'} className="input-style" id="register_password" name="register_password" value={formData['register_password']} onChange={handleChange} required />
-                <button className="password-button-style" type="button" onClick={handleTogglePassword}>
-                  {showPassword ? <img src={show} alt="Show Password" width='20px' height='20px' /> : <img src={hide} alt="Hide Password" width='20px' height='20px' />}
-                </button>
-              </div>
-              <label className="label-style" htmlFor="register_confirmpassword">
-                Confirm Password:
-              </label>
-              <div className="password-toggle">
-                <input type={showConfirmPassword ? 'text' : 'password'} className="input-style" id="register_confirmpassword" name="register_confirmpassword" value={formData['register_confirmpassword']} onChange={handleChange} required />
-                <button className="password-button-style" type="button" onClick={handleToggleConfirmPassword}>
-                  {showConfirmPassword ? <img src={show} alt="Show Password" width='20px' height='20px' /> : <img src={hide} alt="Hide Password" width='20px' height='20px' />}
-                </button>
-              </div>
-
+        <label className="label-style" htmlFor="password">
+          Password:
+        </label>
+        <div className="password-toggle">
+          <input type={showPassword ? 'text' : 'password'} className="input-style" id="password" name="password" value={formData['password']} onChange={handleChange} required />
+          <button className="password-button-style" type="button" onClick={handleTogglePassword}>
+            {showPassword ? <img src={show} alt="Show Password" width='20px' height='20px' /> : <img src={hide} alt="Hide Password" width='20px' height='20px' />}
+          </button>
+        </div>
+        <label className="label-style" htmlFor="register_confirmpassword">
+          Confirm Password:
+        </label>
+        <div className="password-toggle">
+          <input type={showConfirmPassword ? 'text' : 'password'} className="input-style" id="register_confirmpassword" name="register_confirmpassword" value={register_confirmpassword} onChange={handleConfirmPassword} required />
+          <button className="password-button-style" type="button" onClick={handleToggleConfirmPassword}>
+            {showConfirmPassword ? <img src={show} alt="Show Password" width='20px' height='20px' /> : <img src={hide} alt="Hide Password" width='20px' height='20px' />}
+          </button>
+        </div>
               <button type="submit" className="button-style" onClick={handleSubmit}>
                 Submit
               </button>
-            </form>
+      </form>
     </div>
   );
 };
