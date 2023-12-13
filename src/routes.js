@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from '../src/Pages/Homepage/Homepage';
 import Services from './Pages/ServiceSection/serviceSection';
 import Signin from './Pages/Signing/sign_in';
+import Registration from './Pages/Signing/registration';
+import Login from './Pages/Signing/login';
 import NotFound from '../src/Components/NotFound/NotFound';
 
 const RoutesFunc = () => {
