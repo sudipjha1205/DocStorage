@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Components/Authentication/AuthContext";
+
 import "./login.css"; // Ensure that your CSS file is correctly linked
 import show from "../../Illustrations/show.png";
 import hide from "../../Illustrations/hide.png";
 
 const Login = () => {
+
+  const { login } = useAuth();
+
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -25,6 +30,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    login();
 
     // Add the CSRF token to the headers
     const headers = {
@@ -36,7 +42,7 @@ const Login = () => {
       console.log('Form Data:', formData);
       console.log('Headers:', headers);
 
-      const response = await fetch('http://localhost:8000/user/registration/', {
+      const response = await fetch('http://localhost:8000/user/login/', {
         method: 'post',
         headers: headers,
         body: JSON.stringify(formData),
@@ -56,7 +62,7 @@ const Login = () => {
       localStorage.setItem('access_token', access_token);
       localStorage.setItem('refresh_token', refresh_token);
 
-      navigate("/");
+      navigate("/Employee/homepage");
       
     } catch (error) {
       console.error('Registration failed', error);

@@ -21,14 +21,14 @@ const Signin = () => {
         <Navbar />
         <div className="center-container">
             <div className="signin-page">
-                <ul className="nav nav-pills mb-3 d-flex justify-content-center" id="pills-tab" role="tablist">
+                <ul className="nav nav-pills mb-3 d-flex justify-content-center nav-pills-style" id="pills-tab" role="tablist">
                     <li className="nav-item" role="presentation">
-                        <button className="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true">
+                        <button className="nav-link active nav-link-style" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true">
                         Login
                         </button>
                     </li>
                     <li className="nav-item" role="presentation">
-                        <button className="nav-link" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false">
+                        <button className="nav-link nav-link-style" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false">
                         Register
                         </button>
                     </li>
