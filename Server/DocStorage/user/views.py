@@ -62,7 +62,7 @@ def get_csrf_token(request):
     return JsonResponse({'csrfToken': get_token(request)})
 
 @api_view(['POST'])
-def registration(request):
+def login(request):
     email = request.data.get('email')
     password = request.data.get('password')
 
@@ -78,3 +78,15 @@ def registration(request):
     else:
         return JsonResponse({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
+
+@api_view(['POST'])
+def registration(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    user = User.objects.create_user(username=email,password=password)
+    user.save()
+    
+    if user is not None:
+        return JsonResponse({'message': 'Registered Successfully'})
+    return JsonResponse({'message': 'Registration Failed'})

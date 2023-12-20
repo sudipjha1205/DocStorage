@@ -67,7 +67,7 @@ const Registration = () => {
       console.log('Form Data:', formData);
       console.log('Headers:', headers);
 
-      const response = await fetch('http://localhost:8000/user/register/', {
+      const response = await fetch('http://localhost:8000/user/registration/', {
         method: 'post',
         headers: headers,
         body: JSON.stringify(formData),

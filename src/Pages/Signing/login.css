@@ -14,7 +14,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
-  .nav-pills .nav-link {
+  .nav-pills-style .nav-link-style {
     border-radius: 5px;
     color: #fff;
     background-color: #3498db;
@@ -22,7 +22,7 @@
     text-align: center;
   }
 
-  .nav-pills .nav-link:hover {
+  .nav-pills-style .nav-link-style:hover {
     background-color: #2980b9;
   }
 

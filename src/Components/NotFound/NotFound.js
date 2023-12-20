@@ -3,7 +3,7 @@ import React from 'react';
 const NotFound = () => {
     return(
         <div>
-            HUMOE TH HAI HI NOOOO
+            HUMPE TH HAI HI NOOOO
         </div>
     )
 }
