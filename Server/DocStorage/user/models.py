@@ -27,3 +27,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+
+class KYC(models.Model):
+    consumer_no = models.CharField(max_length=255,unique=True)
+    pdf_file = models.FileField(upload_to='pdf_documents/')
+
+    def __str__(self):
+        return f"{self.consumer_no} - {self.pdf_file}"

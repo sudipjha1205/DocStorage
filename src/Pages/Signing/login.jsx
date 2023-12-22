@@ -30,6 +30,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailRegex.test(formData['email']);
+
+    if (isValidEmail === false){
+      alert('Please enter a valid Email ID');
+      setFormData({email: '', password: ''});
+      return;
+    }
+
     login();
 
     // Add the CSRF token to the headers
@@ -87,7 +97,7 @@ const Login = () => {
                   {showPassword ? <img src={show} alt="Show Password" width='20px' height='20px' /> : <img src={hide} alt="Hide Password" width='20px' height='20px' />}
                 </button>
               </div>
-
+              <label className="pass-instruction">Password should contain an Uppercase, lowercase, number, special character and of length 8 least.</label>
               <button type="submit" className="button-style" onClick={handleSubmit}>
                 Login
               </button>

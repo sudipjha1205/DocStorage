@@ -1,12 +1,12 @@
 import json
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse,Http404
 from django.middleware.csrf import get_token
 from rest_framework.exceptions import ValidationError
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny
-from .models import CustomUser
+from .models import CustomUser,KYC
 from .serializers import UserSerializer
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -14,6 +14,11 @@ from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from .EmailBackend import EmailBackend
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.views.decorators.http import require_POST
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 
 class TokenObtainView(APIView):
     def post(self, request, *args, **kwargs):
@@ -90,3 +95,41 @@ def registration(request):
     if user is not None:
         return JsonResponse({'message': 'Registered Successfully'})
     return JsonResponse({'message': 'Registration Failed'})
+
+
+@csrf_exempt
+@require_POST
+def upload_pdf(request):
+    if request.method == 'POST':
+        consumer_no = request.POST.get('consumerNo')
+        pdf_file = request.FILES.get('pdfFile')
+
+
+        if KYC.objects.filter(consumer_no=consumer_no).exists():
+            return JsonResponse({'error': 'Consumer number already exists'}, status=403)
+    
+        if pdf_file:
+            try:
+                # Create a new instance of your PDF model
+                pdf_document = KYC(consumer_no=consumer_no, pdf_file=pdf_file)
+                pdf_document.full_clean()  # Validate the model fields, raises ValidationError if not valid
+                pdf_document.save()
+
+                return JsonResponse({'message': 'PDF uploaded successfully'})
+            except ValidationError as e:
+                return JsonResponse({'error': str(e)}, status=400)
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+def get_kyc(request,consumer_number):
+    try:
+        # Assuming you have a model named KYC with a 'pdf_file' field
+        kyc_object = get_object_or_404(KYC, consumer_no=consumer_number)
+
+        # Serve the PDF file
+        response = HttpResponse(kyc_object.pdf_file.read(), content_type='application/pdf')
+        response['Content-Disposition'] = f'inline; filename="{consumer_number}.pdf"'
+        return response
+    except Http404:
+        return JsonResponse({'error': 'Consumer number not found'}, status=404)

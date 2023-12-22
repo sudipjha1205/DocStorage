@@ -1,14 +1,14 @@
 .company-name{
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
     color: beige;
+    margin-top: 3px;
 }
 
 .navbar-brand{
     display: flex;
     align-items: center;
 }
-
 
 .custom-toggler-icon {
     display: flex;
@@ -37,4 +37,28 @@
     transform: rotate(45deg) translate(-5px, -6px);
   }
   
-  
+  .topsection-button-emp{
+    text-align: center;
+    display: block;
+    padding: 5px 5px; /* Add padding for better touch interaction on mobile */
+    font-size: 18px;
+    width: 100px;
+    background-color: #00B997;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    outline: none;
+    color: beige;
+    transition: background-color 220ms ease-in-out;
+    cursor: pointer;
+    font-weight: bold;
+    align-items: center;
+  }
+
+  .topsection-button-emp:hover{
+    background-color: transparent;
+    border: 2px solid #00B997;
+  }
+
+  .nav-item-style{
+    margin-top: 3px;
+  }

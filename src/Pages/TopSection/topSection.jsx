@@ -1,10 +1,11 @@
 import React from 'react';
 
-import Navbar from '../../Components/Navbar/Navbar';
+import { useAuth } from '../../Components/Authentication/AuthContext';
 import logo from "../../Assets/logo_croped.png"
 import './topsection.css';
 
 const TopSection = () => {
+    const { isAuthenticated,logout } = useAuth();
     return(
         <div className='background-image'>
             <div className='topsection'>
@@ -14,7 +15,7 @@ const TopSection = () => {
                     </div>
                     <div className='motto'>Everything in your pocket</div>
                     <div>
-                        <button className='topsection-button'><a href='/signin'>Log In</a></button>
+                        {isAuthenticated ? <button className='topsection-button' onClick={() => logout()}><a href='/signin'>Log Out</a></button> : <button className='topsection-button'><a href='/signin'>Log In</a></button>}
                     </div>
                 </div>
             </div>

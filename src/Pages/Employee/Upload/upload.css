@@ -6,10 +6,18 @@
     width: 50%;
 }
 
+.fileUploadButton{
+    width: auto;
+}
+
 @media (max-width:768px) {
     .upload-box{
         margin: 25px;
         width: auto;
+    }
+
+    .fileUploadButton{
+        width: 50%;
     }
     
 }
