@@ -1,10 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react';
+
+import { useAuth } from '../Authentication/AuthContext';
 import logo from "../../Assets/logo_croped.png";
 import './Navbar.css';
 
 const Navbar = () => {
   const navbarRef = useRef(null);
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const { isAuthenticated } = useAuth();
+  const { logout } = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -43,17 +47,20 @@ const Navbar = () => {
 
         <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`} id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <a className="nav-link" href="#" style={{ color: 'beige' }}>Home</a>
+            <li className="nav-item nav-item-style">
+              <a className="nav-link" href="/" style={{ color: 'beige' }}>Home</a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item nav-item-style">
               <a className="nav-link" href="#" style={{ color: 'beige' }}>About</a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item nav-item-style">
               <a className="nav-link" href="#" style={{ color: 'beige' }}>Services</a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item nav-item-style">
               <a className="nav-link" href="#" style={{ color: 'beige' }}>Contact</a>
+            </li>
+            <li className='nav-item'>
+              {isAuthenticated ? <button className='topsection-button-emp' onClick={() => logout()}><a href='/signin'>Log Out</a></button> : ''}
             </li>
           </ul>
         </div>

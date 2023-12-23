@@ -51,6 +51,28 @@ const Registration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailRegex.test(formData['email']);
+
+    if (isValidEmail === false){
+      alert('Please enter a valid Email ID');
+      setFormData({email: '', password: ''});
+      setRegister_ConfirmPassword('');
+      return;
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    // Check if the password matches the regex
+    const isValidPassword = passwordRegex.test(formData['password']);
+
+    if (isValidPassword === false){
+      alert("Please give a valid password");
+      setFormData({email: formData['email'], password: ''});
+      setRegister_ConfirmPassword('');
+      return;
+    }
+
     if (formData.password != register_confirmpassword){
       setError("Passwords don't match");
       alert("Password doesn't matches");
@@ -120,9 +142,10 @@ const Registration = () => {
             {showConfirmPassword ? <img src={show} alt="Show Password" width='20px' height='20px' /> : <img src={hide} alt="Hide Password" width='20px' height='20px' />}
           </button>
         </div>
-              <button type="submit" className="button-style" onClick={handleSubmit}>
-                Submit
-              </button>
+        <label className="pass-instruction">Password should contain an Uppercase, lowercase, number, special character and of length 8 least.</label>
+        <button type="submit" className="button-style" onClick={handleSubmit}>
+          Submit
+        </button>
       </form>
     </div>
   );

@@ -66,7 +66,7 @@
   .password-toggle {
     display: flex;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 2px;
   }
 
   .button-style {
@@ -100,4 +100,10 @@
     background-color: transparent;
     border: 2px solid #00B997;
     color: #00B997;
+  }
+
+  .pass-instruction{
+    display: block;
+    margin-bottom: 45px;
+    font-size: 15px;
   }

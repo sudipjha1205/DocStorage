@@ -44,7 +44,7 @@
   .input-style {
     width: 90%;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
     transition: box-shadow 0.3 ease;
@@ -58,7 +58,7 @@
   .password-toggle {
     display: flex;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 0px;
   }
 
   .button-style {
@@ -90,4 +90,10 @@
     background-color: transparent;
     border: 2px solid #00B997;
     color: #00B997;
+  }
+
+  .pass-instruction{
+    display: block;
+    font-size: 12px; /* Adjust the font size as needed */
+    margin-bottom: 15px;
   }
