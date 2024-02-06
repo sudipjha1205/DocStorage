@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/DocStorage/static/css/main.67839f84.css",
+    "main.js": "/DocStorage/static/js/main.5005188d.js",
+    "static/js/787.90e9a667.chunk.js": "/DocStorage/static/js/787.90e9a667.chunk.js",
+    "static/media/mobile_phone.png": "/DocStorage/static/media/mobile_phone.bdfea3cf60ea7c20dc1b.png",
+    "static/media/company_team.jpg": "/DocStorage/static/media/company_team.c341ffa0d6434c5b7b32.jpg",
+    "static/media/campaign_launch_flatline.png": "/DocStorage/static/media/campaign_launch_flatline.307f278fc69045980f5c.png",
+    "static/media/authentication.png": "/DocStorage/static/media/authentication.e9cbbc9fd665f07c09e8.png",
+    "static/media/profile_picture_3.jpg": "/DocStorage/static/media/profile_picture_3.2d4fe24f81d4fb73b4f9.jpg",
+    "static/media/profile_picture_1.jpg": "/DocStorage/static/media/profile_picture_1.e6394fa7747a8b32f4d8.jpg",
+    "static/media/profile_picture_2.jpg": "/DocStorage/static/media/profile_picture_2.f47211a1c2773102cd9a.jpg",
+    "static/media/hide.png": "/DocStorage/static/media/hide.9d0d902bea5a66a6195d.png",
+    "static/media/show.png": "/DocStorage/static/media/show.231d534eb5fa7ae51605.png",
+    "index.html": "/DocStorage/index.html",
+    "main.67839f84.css.map": "/DocStorage/static/css/main.67839f84.css.map",
+    "main.5005188d.js.map": "/DocStorage/static/js/main.5005188d.js.map",
+    "787.90e9a667.chunk.js.map": "/DocStorage/static/js/787.90e9a667.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.67839f84.css",
+    "static/js/main.5005188d.js"
+  ]
+}
