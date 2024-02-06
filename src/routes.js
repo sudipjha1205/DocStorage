@@ -23,7 +23,7 @@ const AppRoutes = () => {
       <Route path="/about" element={<Home />} />
       <Route path="/contact" element={<Home />} />
       <Route path="/services" element={<Services />} />
-      <Route path="/signin" element={<Signin />} />
+      <Route path="/http://thedocstorage.com/signin" element={<Signin />} />
       <Route
         path='Employee/Homepage'
         element={isAuthenticated ? <Homepage /> : <NotAuthorized />}
