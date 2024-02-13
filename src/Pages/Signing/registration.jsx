@@ -22,7 +22,7 @@ const Registration = () => {
     // Fetch CSRF token from the server
     const fetchCsrfToken = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/user/csrf_token/');
+        const response = await axios.get('https://docstorage-server-e48dce0ce08a.herokuapp.com/user/csrf_token/');
         setCsrfToken(response.data.csrfToken);
       } catch (error) {
         console.error('Failed to fetch CSRF token', error);
@@ -89,7 +89,7 @@ const Registration = () => {
       console.log('Form Data:', formData);
       console.log('Headers:', headers);
 
-      const response = await fetch('http://localhost:8000/user/registration/', {
+      const response = await fetch('https://docstorage-server-e48dce0ce08a.herokuapp.com/user/registration/', {
         method: 'post',
         headers: headers,
         body: JSON.stringify(formData),
