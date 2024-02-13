@@ -109,7 +109,7 @@ const Registration = () => {
         setRegister_ConfirmPassword('');
       }
     } catch (error) {
-      alert("User already exists")
+      alert(error)
       console.error('Registration failed', error);
     }
   };

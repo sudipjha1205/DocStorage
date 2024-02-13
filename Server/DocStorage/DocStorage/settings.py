@@ -15,6 +15,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Quick-start development settings - unsuitable for production
@@ -84,11 +85,10 @@ DATABASES = {
         'NAME': 'docstorage',
         'USER': 'sudip',
         'PASSWORD': 'Sud1p_jha',
-        'HOST': 'localhost',
+        'HOST': 'docstorage.cb8ugc22yrnh.ap-south-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
