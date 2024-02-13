@@ -52,7 +52,7 @@ const Login = () => {
       console.log('Form Data:', formData);
       console.log('Headers:', headers);
 
-      const response = await fetch('http://localhost:8000/user/login/', {
+      const response = await fetch('https://docstorage-server-e48dce0ce08a.herokuapp.com/user/login/', {
         method: 'post',
         headers: headers,
         body: JSON.stringify(formData),
