@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../Authentication/AuthContext';
 import logo from "../../Assets/logo_croped.png";
@@ -9,6 +10,7 @@ const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const { isAuthenticated } = useAuth();
   const { logout } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -28,6 +30,11 @@ const Navbar = () => {
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
+
+  const logoutButton = () => {
+    logout();
+    navigate('/Signin');
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
@@ -60,7 +67,7 @@ const Navbar = () => {
               <a className="nav-link" href="#" style={{ color: 'beige' }}>Contact</a>
             </li>
             <li className='nav-item'>
-              {isAuthenticated ? <button className='topsection-button-emp' onClick={() => logout()}><a href='/signin'>Log Out</a></button> : ''}
+              {isAuthenticated ? <button className='topsection-button-emp' onClick={logoutButton}><a href='/signin'>Log Out</a></button> : ''}
             </li>
           </ul>
         </div>

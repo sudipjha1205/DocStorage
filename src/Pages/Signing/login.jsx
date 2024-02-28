@@ -40,7 +40,7 @@ const Login = () => {
       return;
     }
 
-    login();
+    
 
     // Add the CSRF token to the headers
     const headers = {
@@ -73,6 +73,7 @@ const Login = () => {
       localStorage.setItem('refresh_token', refresh_token);
 
       navigate("/Employee/homepage");
+      login();
       
     } catch (error) {
       console.error('Registration failed', error);
